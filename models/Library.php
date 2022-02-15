@@ -18,7 +18,7 @@ class Library
         return $params;
     }
 
-    public static function updateBook($operation_id)
+    public static function returnBook($operation_id)
     {
         $sql = "UPDATE operation SET status = NULL, date_return = current_timestamp
                 WHERE operation_id = '$operation_id'";

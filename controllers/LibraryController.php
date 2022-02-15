@@ -12,9 +12,9 @@ class LibraryController
 
     }
 
-    public static function actionUpdate($operation_id)
+    public static function actionReturn($operation_id)
     {
-        $returnBook = Library::updateBook($operation_id);
+        $returnBook = Library::returnBook($operation_id);
 
         echo json_encode($returnBook,JSON_UNESCAPED_UNICODE | JSON_NUMERIC_CHECK);
 
