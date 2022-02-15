@@ -4,6 +4,5 @@ return array(
 
     'update/([0-9]+)' => 'library/update/$1',
 
-    //'view/([0-9]+)' => 'library/view/$1',
     'view' => 'library/view',
 );

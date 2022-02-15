@@ -4,17 +4,15 @@ class Library
 {
     public static function takeBook($library_card, $book_id)
     {
-        $pdo = Db::getConnection();
-
-        $sql = "INSERT INTO `operation` (`library_card`,`book_id`,`status`) 
-                VALUES (:library_card,:book_id,:status)";
+        $sql = "INSERT INTO operation (library_card, book_id, status) 
+                VALUES (:library_card, :book_id, :status)";
         $params = [
             ':library_card' => $library_card,
             ':book_id' => $book_id,
             ':status' => 1
         ];
 
-        $query = $pdo->prepare($sql);
+        $query = Db::getConnection()->prepare($sql);
         $query->execute($params);
 
         return $params;
@@ -22,23 +20,17 @@ class Library
 
     public static function updateBook($operation_id)
     {
-        $pdo = Db::getConnection();
+        $sql = "UPDATE operation SET status = NULL, date_return = current_timestamp
+                WHERE operation_id = '$operation_id'";
 
-        $params = ['updated record id:' => $operation_id];
-
-        $sql = "UPDATE `operation` SET `status` = NULL , `date_return` = current_timestamp
-                WHERE `operation_id` = '$operation_id'";
-
-        $query = $pdo->prepare($sql);
+        $query = Db::getConnection()->prepare($sql);
         $query->execute();
 
-        return $params;
+        return $operation_id;
     }
 
     public static function viewHistory()
     {
-        $pdo = Db::getConnection();
-
         $sql = "SELECT 
                 u.name,
                 u.surname,
@@ -53,10 +45,10 @@ class Library
                 WHERE o.status = 1
                 ORDER BY o.operation_id ASC";
 
-        $query = $pdo->prepare($sql);
+        $query = Db::getConnection()->prepare($sql);
         $query->execute();
 
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        return $query->fetchAll(PDO::FETCH_CLASS);
     }
 
 }
