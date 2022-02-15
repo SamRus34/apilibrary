@@ -9,6 +9,7 @@ class LibraryController
         //$getBook = array();
         $getBook = Library::takeBook($library_card, $book_id);
 
+
         echo json_encode($getBook,JSON_UNESCAPED_UNICODE | JSON_NUMERIC_CHECK);
         //return true;
 

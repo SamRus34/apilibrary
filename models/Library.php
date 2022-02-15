@@ -26,7 +26,7 @@ class Library
 
         $params = ['updated record id:' => $operation_id];
 
-        $sql = "UPDATE `operation` SET `status` = 0 , `date_return` = current_timestamp
+        $sql = "UPDATE `operation` SET `status` = NULL , `date_return` = current_timestamp
                 WHERE `operation_id` = '$operation_id'";
 
         $query = $pdo->prepare($sql);
@@ -39,10 +39,19 @@ class Library
     {
         $pdo = Db::getConnection();
 
-        $sql = "SELECT `id`, `name`, `genre`, `author`
-                FROM `book`
-                ORDER BY `id`
-                ASC LIMIT 10";
+        $sql = "SELECT 
+                u.name,
+                u.surname,
+                b.name AS book_name,
+                b.genre,
+                b.author
+                FROM user u
+                JOIN operation o
+                ON o.library_card = u.library_card
+                JOIN book b 
+                ON b.id = o.book_id
+                WHERE o.status = 1
+                ORDER BY o.operation_id ASC";
 
         $query = $pdo->prepare($sql);
         $query->execute();
