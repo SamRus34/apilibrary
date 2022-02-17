@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 16 2022 г., 17:12
+-- Время создания: Фев 17 2022 г., 16:24
 -- Версия сервера: 8.0.24
 -- Версия PHP: 8.0.8
 
@@ -101,7 +101,6 @@ ALTER TABLE `book`
 --
 ALTER TABLE `operation`
   ADD PRIMARY KEY (`operation_id`),
-  ADD UNIQUE KEY `you_have_this_book` (`library_card`,`book_id`,`status`) USING BTREE,
   ADD KEY `book_id` (`book_id`),
   ADD KEY `library_card` (`library_card`) USING BTREE;
 
@@ -126,7 +125,7 @@ ALTER TABLE `book`
 -- AUTO_INCREMENT для таблицы `operation`
 --
 ALTER TABLE `operation`
-  MODIFY `operation_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `operation_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `user`
