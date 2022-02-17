@@ -51,6 +51,18 @@ class Library
         return $query->fetchAll(PDO::FETCH_CLASS);
     }
 
+    public static function checkBook($library_card, $book_id)
+    {
+        $sql = "SELECT COUNT(*) AS count FROM operation 
+                WHERE status=1 AND library_card='$library_card' AND book_id='$book_id'";
+
+        $count = Db::getConnection()->prepare($sql);
+        $count->execute();
+
+        return $count->fetch(PDO::FETCH_ASSOC);
+
+    }
+
 }
 
 

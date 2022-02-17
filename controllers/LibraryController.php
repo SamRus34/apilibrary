@@ -6,9 +6,14 @@ class LibraryController
 {
     public static function actionTake($library_card, $book_id)
     {
-        $getBook = Library::takeBook($library_card, $book_id);
+        $checkList = Library::checkBook($library_card, $book_id);
 
-        echo json_encode($getBook,JSON_UNESCAPED_UNICODE | JSON_NUMERIC_CHECK);
+        if (array_sum($checkList) == 0) {
+            Library::takeBook($library_card, $book_id);
+        } else {
+            return [print_r(json_encode('Неудача. Вы уже взяли эту книгу!', JSON_UNESCAPED_UNICODE))];
+        }
+        return [print_r(json_encode('Успех! Вы взяли книгу.', JSON_UNESCAPED_UNICODE))];
 
     }
 
@@ -16,7 +21,7 @@ class LibraryController
     {
         $returnBook = Library::returnBook($operation_id);
 
-        echo json_encode($returnBook,JSON_UNESCAPED_UNICODE | JSON_NUMERIC_CHECK);
+        return [print_r(json_encode('Вы вернули книгу!', JSON_UNESCAPED_UNICODE))];
 
     }
 
@@ -24,7 +29,18 @@ class LibraryController
     {
         $bookList = Library::viewHistory();
 
-        echo json_encode($bookList,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK);
+        echo json_encode('Список книг и читателей, взявших их: ',JSON_UNESCAPED_UNICODE);
+        echo json_encode($bookList, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK);
+        return true;
+
+    }
+
+    public static function actionCheck($library_card, $book_id)
+    {
+        $returnBook = Library::checkBook($library_card, $book_id);
+
+        print_r($returnBook);
+        return true;
 
     }
 
