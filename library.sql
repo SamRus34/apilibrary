@@ -82,8 +82,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `name`, `surname`, `library_card`) VALUES
 (1, 'Кирилл', 'Рогов', 101),
 (2, 'Василиса', 'Иванова', 102),
-(3, 'Чарльз', 'Уоткинс', 103),
-(4, 'Василий', 'Рогов', 104);
+(3, 'Александр', 'Мальков', 103),
+(4, 'Василий', 'Смирнов', 104);
 
 --
 -- Индексы сохранённых таблиц
@@ -125,7 +125,7 @@ ALTER TABLE `book`
 -- AUTO_INCREMENT для таблицы `operation`
 --
 ALTER TABLE `operation`
-  MODIFY `operation_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `operation_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT для таблицы `user`
