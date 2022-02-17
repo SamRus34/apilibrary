@@ -125,7 +125,7 @@ ALTER TABLE `book`
 -- AUTO_INCREMENT для таблицы `operation`
 --
 ALTER TABLE `operation`
-  MODIFY `operation_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `operation_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `user`
