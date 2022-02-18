@@ -31,13 +31,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://apilibrary/return/1",
+					"raw": "http://apilibrary/return/101/1",
 					"protocol": "http",
 					"host": [
 						"apilibrary"
 					],
 					"path": [
 						"return",
+						"101",
 						"1"
 					]
 				}
