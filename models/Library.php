@@ -29,20 +29,15 @@ class Library
         return $operation_id;
     }
 
-    public static function viewHistory()
+    public static function viewHistory($library_card)
     {
-        $sql = "SELECT 
-                u.name,
-                u.surname,
-                b.name AS book_name,
-                b.genre,
-                b.author
+        $sql = "SELECT u.name, u.surname, b.name AS book_name, b.genre, b.author 
                 FROM user u
                 JOIN operation o
-                ON o.library_card = u.library_card
-                JOIN book b 
-                ON b.id = o.book_id
-                WHERE o.status = 1
+                    ON o.library_card = u.library_card
+                JOIN book b
+                    ON b.id = o.book_id
+                WHERE o.status = 1 AND u.library_card = '$library_card'
                 ORDER BY o.operation_id ASC";
 
         $query = Db::getConnection()->prepare($sql);
@@ -54,13 +49,12 @@ class Library
     public static function checkBook($library_card, $book_id)
     {
         $sql = "SELECT COUNT(*) AS count FROM operation 
-                WHERE status=1 AND library_card='$library_card' AND book_id='$book_id'";
+                WHERE status = 1 AND library_card = '$library_card' AND book_id = '$book_id'";
 
-        $count = Db::getConnection()->prepare($sql);
-        $count->execute();
+        $query = Db::getConnection()->prepare($sql);
+        $query->execute();
 
-        return $count->fetch(PDO::FETCH_ASSOC);
-
+        return $query->fetch(PDO::FETCH_ASSOC);
     }
 
 }
