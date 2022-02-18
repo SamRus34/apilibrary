@@ -18,15 +18,15 @@ class Library
         return $params;
     }
 
-    public static function returnBook($operation_id)
+    public static function returnBook($library_card, $book_id)
     {
         $sql = "UPDATE operation SET status = NULL, date_return = current_timestamp
-                WHERE operation_id = '$operation_id'";
+                WHERE library_card = '$library_card' AND book_id = '$book_id'";
 
         $query = Db::getConnection()->prepare($sql);
         $query->execute();
 
-        return $operation_id;
+        return true;
     }
 
     public static function viewHistory($library_card)

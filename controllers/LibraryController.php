@@ -16,10 +16,15 @@ class LibraryController
         return [print_r(json_encode('Успех! Вы взяли книгу.', JSON_UNESCAPED_UNICODE))];
     }
 
-    public static function actionReturn($operation_id)
+    public static function actionReturn($library_card, $book_id)
     {
-        $returnBook = Library::returnBook($operation_id);
+        $checkDuplicate = Library::checkBook($library_card, $book_id);
 
+        if (array_sum($checkDuplicate) == 1) {
+            Library::returnBook($library_card, $book_id);
+        } else {
+            return [print_r(json_encode('Вы уже вернули эту книгу!', JSON_UNESCAPED_UNICODE))];
+        }
         return [print_r(json_encode('Вы вернули книгу!', JSON_UNESCAPED_UNICODE))];
     }
 
