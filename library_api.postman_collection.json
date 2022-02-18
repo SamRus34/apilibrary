@@ -50,13 +50,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://apilibrary/view",
+					"raw": "http://apilibrary/view/101",
 					"protocol": "http",
 					"host": [
 						"apilibrary"
 					],
 					"path": [
-						"view"
+						"view",
+						"101"
 					]
 				}
 			},
